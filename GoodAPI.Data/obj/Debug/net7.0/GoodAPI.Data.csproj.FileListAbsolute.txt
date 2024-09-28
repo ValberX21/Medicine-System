@@ -1,0 +1,11 @@
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\bin\Debug\net7.0\GoodAPI.Data.deps.json
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\bin\Debug\net7.0\GoodAPI.Data.dll
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\bin\Debug\net7.0\GoodAPI.Data.pdb
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.AssemblyInfoInputs.cache
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.AssemblyInfo.cs
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.csproj.CoreCompileInputs.cache
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.dll
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\refint\GoodAPI.Data.dll
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.pdb
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\ref\GoodAPI.Data.dll
