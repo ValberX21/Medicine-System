@@ -32,3 +32,4 @@ C:\_developer\DOTNET\GoodAPI\RabbitMQ_CONSUMER\obj\Debug\net7.0\refint\RabbitMQ_
 C:\_developer\DOTNET\GoodAPI\RabbitMQ_CONSUMER\obj\Debug\net7.0\RabbitMQ_CONSUMER.pdb
 C:\_developer\DOTNET\GoodAPI\RabbitMQ_CONSUMER\obj\Debug\net7.0\RabbitMQ_CONSUMER.genruntimeconfig.cache
 C:\_developer\DOTNET\GoodAPI\RabbitMQ_CONSUMER\obj\Debug\net7.0\ref\RabbitMQ_CONSUMER.dll
+C:\_developer\DOTNET\GoodAPI\RabbitMQ_CONSUMER\obj\Debug\net7.0\RabbitMQ_CONSUMER.sourcelink.json

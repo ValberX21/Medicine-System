@@ -1,4 +1,6 @@
-﻿using GoodAPI.Models;
+﻿using GoodAPI.Data.Models;
+using GoodAPI.Dto;
+using GoodAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodAPI.Interfaces
@@ -9,5 +11,6 @@ namespace GoodAPI.Interfaces
         Task<Medicine> GetMedicineById(int MedicineId);
         Task<IActionResult> CreateUpdateMedicine(Medicine MedicineDto);
         Task<bool> DeleteMedicine(int MedicineId);
+        Task<ResponseDto> LoginUser(User usu);
     }
 }

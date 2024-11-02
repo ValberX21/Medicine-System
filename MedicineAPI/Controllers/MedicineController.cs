@@ -1,9 +1,11 @@
 ﻿using GoodAPI.Data;
+using GoodAPI.Data.Models;
 using GoodAPI.Dto;
 using GoodAPI.Erro;
 using GoodAPI.Interfaces;
 using GoodAPI.Mensage;
 using GoodAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -25,6 +27,58 @@ namespace GoodAPI.Controllers
 
         }
 
+        [HttpGet("test")]
+        public async Task<IActionResult> TestApi()
+        {
+            _response.Result = "API WORKING";
+            return StatusCode(StatusCodes.Status200OK, _response);
+        }
+
+        [HttpPost("authentic")]
+        public async Task<IActionResult> authUser(User usu)
+        {     
+            try
+            {
+                object result = await _medicineRepository.LoginUser(usu);
+
+                _response.Result = result;
+
+                var statusRetorned = result.GetType().GetProperty("StatusCode")?.GetValue(result);
+
+                if (statusRetorned.ToString() == "500")
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, _response);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status201Created, _response);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErroRegister erroRegister = new ErroRegister();
+
+                var errorLog = new ErrorLog
+                {
+                    ErrorMessage = ex.Message,
+                    ErrorSource = ex.Source,
+                    StackTrace = ex.StackTrace,
+                    InnerException = ex.InnerException?.Message,
+                };
+
+                erroRegister.register(errorLog);
+
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                     = new List<string>() { ex.ToString() };
+
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+
+            }
+
+        }
+
+        [Authorize]
         [HttpPost("addUpdateMedicine")]
         public async Task<IActionResult> InsertMedicine([FromBody] Medicine Medicine)
         {
@@ -69,6 +123,7 @@ namespace GoodAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("getAllMedicines")]
         public async Task<IActionResult> getMedicines()
         {
@@ -106,6 +161,7 @@ namespace GoodAPI.Controllers
             return StatusCode(codeStatus, _response);
         }
 
+        [Authorize]
         [HttpPut("updateMedicine")]
         public async Task<IActionResult> updateMedicine([FromBody] Medicine Medicine)
         {
@@ -147,6 +203,7 @@ namespace GoodAPI.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("deleteMedicine")]
         public async Task<IActionResult> deleteMedicine(int medicineID)
         {

@@ -1,28 +1,81 @@
-﻿using AutoMapper;
-using Azure;
+﻿using Azure;
 using GoodAPI.Data;
+using GoodAPI.Data.Models;
 using GoodAPI.Dto;
 using GoodAPI.Erro;
 using GoodAPI.Interfaces;
 using GoodAPI.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
-using System.Collections.Generic;
+using Microsoft.IdentityModel.Tokens;
+using System.Data;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Security.Claims;
+using System.Text;
 
 namespace GoodAPI.Repository
 {
     public class Medicine : IMedicine
     {
         private readonly ApplicationDbContext _db;
+        private readonly IConfiguration _configuration;
+        //protected ResponseDto _response;
 
-        public Medicine(ApplicationDbContext db)
+        public Medicine(ApplicationDbContext db, IConfiguration configuration)
         {
             _db = db;
+            _configuration = configuration;           
         }
-               
+
+        public async Task<ResponseDto> LoginUser(User usu)
+        {
+            //string connectionString = _configuration.GetConnectionString("DefaultConnection");
+
+            //string query = "SELECT * FROM Users WHERE FullName = @FullName";
+
+            //string tk = "";
+
+            //string encrypTk = "";
+
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    using (SqlCommand command = new SqlCommand(query, connection))
+            //    {
+            //        command.Parameters.AddWithValue("@FullName", usu.Name);
+
+            //        await connection.OpenAsync();
+
+            //        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+            //        {
+            //            if (await reader.ReadAsync())  
+            //            {
+            //                User foundUser = new User
+            //                {
+            //                    UserId = reader["UserId"] != DBNull.Value ? Convert.ToInt32(reader["UserId"]) : 0,
+            //                    Name = reader["FullName"]?.ToString(),
+            //                    Password = reader["Password"] != DBNull.Value ? Encoding.UTF8.GetBytes(reader["Password"].ToString()) : null
+            //                };
+
+            //                tk = geraToken(foundUser);
+
+            //                encrypTk = JWTEncrypt.EncryptToken(tk);
+
+            //                _response.Result = "User found";
+            //            }
+            //            else
+            //            {
+            //                _response.Result = "User not found";
+            //            }
+            //        }
+            //    }
+            //}
+            return null;
+        }
+
+
+
         public async Task<IActionResult> CreateUpdateMedicine(Models.Medicine medicin)
         {
             try
@@ -103,6 +156,40 @@ namespace GoodAPI.Repository
             }
 
             return resultQuery; 
+        }
+
+        public string geraToken(User usu)
+        {            
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration.GetSection("Secret").ToString());
+            var tokenDescription = new SecurityTokenDescriptor();
+
+            try
+            {
+                tokenDescription = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                            new Claim(ClaimTypes.Name,usu.Name,
+                                      ClaimTypes.Hash,usu.Password.ToString()
+                                        )
+                    }),
+                    Expires = DateTime.UtcNow.AddHours(24),
+                    SigningCredentials =
+                            new SigningCredentials(
+                                new SymmetricSecurityKey(key),
+                                SecurityAlgorithms.HmacSha256Signature)
+
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
+            var finalToken = tokenHandler.CreateToken(tokenDescription);
+            return tokenHandler.WriteToken(finalToken);
         }
     }
 }

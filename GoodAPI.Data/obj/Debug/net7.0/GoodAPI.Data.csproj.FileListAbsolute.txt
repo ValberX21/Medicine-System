@@ -9,3 +9,5 @@ C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.dll
 C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\refint\GoodAPI.Data.dll
 C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.pdb
 C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\ref\GoodAPI.Data.dll
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.sourcelink.json
+C:\_developer\DOTNET\GoodAPI\GoodAPI.Data\obj\Debug\net7.0\GoodAPI.Data.csproj.AssemblyReference.cache

@@ -161,3 +161,6 @@ C:\_developer\DOTNET\GoodAPI\MedicineAPI\bin\Debug\net7.0\RabbitMQ_CONSUMER.runt
 C:\_developer\DOTNET\GoodAPI\MedicineAPI\bin\Debug\net7.0\RabbitMQ_CONSUMER.exe
 C:\_developer\DOTNET\GoodAPI\MedicineAPI\bin\Debug\net7.0\RabbitMQ_CONSUMER.dll
 C:\_developer\DOTNET\GoodAPI\MedicineAPI\bin\Debug\net7.0\RabbitMQ_CONSUMER.pdb
+C:\_developer\DOTNET\GoodAPI\MedicineAPI\obj\Debug\net7.0\GoodAPI.sourcelink.json
+C:\_developer\DOTNET\GoodAPI\MedicineAPI\bin\Debug\net7.0\JWT.dll
+C:\_developer\DOTNET\GoodAPI\MedicineAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
