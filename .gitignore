@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/MedicineAPI/appsettings.json
+/RegisterMedicinesFront/.vs
+/RegisterMedicinesFront/bin
+/RegisterMedicinesFront/obj
+/MedicineAPI/bin/Debug/net7.0
+/MedicineAPI/.vs/GoodAPI/FileContentIndex
