@@ -35,23 +35,25 @@ namespace GoodAPI.Controllers
         }
 
         [HttpPost("authentic")]
-        public async Task<IActionResult> authUser(User usu)
+        public async Task<IActionResult> authUser([FromBody] User usu)
         {     
             try
             {
                 object result = await _medicineRepository.LoginUser(usu);
 
-                _response.Result = result;
+                var resultProperty = result.GetType().GetProperty("Result");
+                var resultInstance = resultProperty?.GetValue(result);
+                var statusRetorned2 = resultInstance?.GetType().GetProperty("StatusCode")?.GetValue(resultInstance);
 
-                var statusRetorned = result.GetType().GetProperty("StatusCode")?.GetValue(result);
+                _response.Result = resultInstance;
 
-                if (statusRetorned.ToString() == "500")
+                if (statusRetorned2.ToString() == "500")
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, _response);
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status201Created, _response);
+                    return StatusCode(StatusCodes.Status200OK, _response);
                 }
             }
             catch (Exception ex)

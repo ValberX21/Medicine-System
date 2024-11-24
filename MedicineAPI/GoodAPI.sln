@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodAPI", "GoodAPI.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ_CONSUMER", "..\RabbitMQ_CONSUMER\RabbitMQ_CONSUMER.csproj", "{60ECED1F-5D93-4892-B04E-18FB6A1AB5E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodAPI.Data", "..\GoodAPI.Data\GoodAPI.Data.csproj", "{BAB60A92-4621-4C6D-9D7B-46341F2BD62A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodAPI.Data", "..\GoodAPI.Data\GoodAPI.Data.csproj", "{BAB60A92-4621-4C6D-9D7B-46341F2BD62A}"
+EndProject
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "RegisterMedicinesFront", "..\RegisterMedicinesFront\RegisterMedicinesFront.vbproj", "{6F83CF68-4513-4A33-817F-93A8DDFDB592}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{BAB60A92-4621-4C6D-9D7B-46341F2BD62A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB60A92-4621-4C6D-9D7B-46341F2BD62A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB60A92-4621-4C6D-9D7B-46341F2BD62A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F83CF68-4513-4A33-817F-93A8DDFDB592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F83CF68-4513-4A33-817F-93A8DDFDB592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F83CF68-4513-4A33-817F-93A8DDFDB592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F83CF68-4513-4A33-817F-93A8DDFDB592}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

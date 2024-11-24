@@ -10,7 +10,7 @@ public class JWTEncrypt
     {
         using (var aes = Aes.Create())
         {
-            aes.Key = Encoding.UTF8.GetBytes(SecretKey); // 32 bytes for AES-256
+            aes.Key = Encoding.UTF8.GetBytes(SecretKey); 
             aes.GenerateIV();
 
             var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);

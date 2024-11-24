@@ -12,16 +12,12 @@ namespace RabbitMQ_CONSUMER
     {
         public static void Main()
         {
-            // Create a connection factory
             var factory = new ConnectionFactory() { HostName = "localhost" };
 
-            // Establish the connection
             using (var connection = factory.CreateConnection())
             {
-                // Create a channel
                 using (var channel = connection.CreateModel())
                 {
-                    // Declare the same queue
                     channel.QueueDeclare(queue: "hello",
                                          durable: false,
                                          exclusive: false,
@@ -30,7 +26,6 @@ namespace RabbitMQ_CONSUMER
 
                     Console.WriteLine(" [*] Waiting for messages.");
 
-                    // Create a consumer event
                     var consumer = new EventingBasicConsumer(channel);
                     consumer.Received += (model, ea) =>
                     {
@@ -39,7 +34,6 @@ namespace RabbitMQ_CONSUMER
                         Console.WriteLine($" [x] Received {message}");
                     };
 
-                    // Start consuming the messages
                     channel.BasicConsume(queue: "hello",
                                          autoAck: true,
                                          consumer: consumer);

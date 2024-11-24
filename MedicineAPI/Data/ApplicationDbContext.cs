@@ -1,6 +1,5 @@
 ﻿using GoodAPI.Models;
 using Microsoft.EntityFrameworkCore;
-
 namespace GoodAPI.Data
 {
     public class ApplicationDbContext : DbContext

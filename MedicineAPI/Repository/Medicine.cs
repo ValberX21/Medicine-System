@@ -21,57 +21,65 @@ namespace GoodAPI.Repository
     {
         private readonly ApplicationDbContext _db;
         private readonly IConfiguration _configuration;
-        //protected ResponseDto _response;
+        protected ResponseDto _response;
 
         public Medicine(ApplicationDbContext db, IConfiguration configuration)
         {
             _db = db;
-            _configuration = configuration;           
+            _configuration = configuration;
+            this._response = new ResponseDto();
         }
 
         public async Task<ResponseDto> LoginUser(User usu)
         {
-            //string connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
 
-            //string query = "SELECT * FROM Users WHERE FullName = @FullName";
+            string query = "SELECT * FROM Users WHERE FullName = @FullName AND Password = @Password";
 
-            //string tk = "";
+            string tk = "";
 
-            //string encrypTk = "";
+            string encrypTk = "";
 
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    using (SqlCommand command = new SqlCommand(query, connection))
-            //    {
-            //        command.Parameters.AddWithValue("@FullName", usu.Name);
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@FullName", usu.Name);
+                    command.Parameters.AddWithValue("@Password", usu.Password);
 
-            //        await connection.OpenAsync();
+                    await connection.OpenAsync();
 
-            //        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-            //        {
-            //            if (await reader.ReadAsync())  
-            //            {
-            //                User foundUser = new User
-            //                {
-            //                    UserId = reader["UserId"] != DBNull.Value ? Convert.ToInt32(reader["UserId"]) : 0,
-            //                    Name = reader["FullName"]?.ToString(),
-            //                    Password = reader["Password"] != DBNull.Value ? Encoding.UTF8.GetBytes(reader["Password"].ToString()) : null
-            //                };
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            User foundUser = new User
+                            {
+                                UserId = reader["UserId"] != DBNull.Value ? Convert.ToInt32(reader["UserId"]) : 0,
+                                Name = reader["FullName"]?.ToString(),
+                                Password = reader["Password"] != DBNull.Value ? Encoding.UTF8.GetBytes(reader["Password"].ToString()) : null
+                            };
 
-            //                tk = geraToken(foundUser);
+                            tk = geraToken(foundUser);
 
-            //                encrypTk = JWTEncrypt.EncryptToken(tk);
+                            encrypTk = JWTEncrypt.EncryptToken(tk);
 
-            //                _response.Result = "User found";
-            //            }
-            //            else
-            //            {
-            //                _response.Result = "User not found";
-            //            }
-            //        }
-            //    }
-            //}
-            return null;
+                            Token finalToken = new Token()
+                            {
+                                StatusCode = 200,
+                                EncrypToken = encrypTk
+                            };
+
+                            _response.Result = finalToken;
+                        }
+                        else
+                        {
+                            _response.Result = "User not found";
+                        }
+                    }
+                }
+            }
+            return _response;
         }
 
 

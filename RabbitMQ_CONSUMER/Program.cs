@@ -4,15 +4,14 @@ using System.Text;
 
 var factory = new ConnectionFactory()
 {
-    HostName = "localhost",  // Use your RabbitMQ host here
-    UserName = "guest",      // Default RabbitMQ username
-    Password = "guest"       // Default RabbitMQ password
+    HostName = "localhost",  
+    UserName = "guest",      
+    Password = "guest"      
 };
 
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
-// Declare the queue from which we're going to consume
 string queueName = "medicinesAdd";
 channel.QueueDeclare(queue: queueName,
                      durable: false,
@@ -22,7 +21,6 @@ channel.QueueDeclare(queue: queueName,
 
 Console.WriteLine(" [*] Waiting for messages.");
 
-// Create a consumer to receive messages
 var consumer = new EventingBasicConsumer(channel);
 consumer.Received += (model, ea) =>
 {
@@ -31,11 +29,9 @@ consumer.Received += (model, ea) =>
     Console.WriteLine($" [x] Received {message}");
 };
 
-// Start consuming messages from the queue
 channel.BasicConsume(queue: queueName,
-                     autoAck: true,  // Auto acknowledge the message
+                     autoAck: true,  
                      consumer: consumer);
 
-// Keep the console app running to listen for messages
 Console.WriteLine(" Press [enter] to exit.");
 Console.ReadLine();
