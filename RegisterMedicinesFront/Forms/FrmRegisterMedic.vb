@@ -154,27 +154,24 @@ Public Class FrmRegisterMedic
     End Sub
 
     Private Sub GenerateExcelFromList(medicines As List(Of Medicine), filePath As String)
-        ' Enable EPPlus license context
+
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial
 
         Using package As New ExcelPackage()
             Dim worksheet = package.Workbook.Worksheets.Add("Medicines")
 
-            ' Add header row
             worksheet.Cells(1, 1).Value = "ID"
             worksheet.Cells(1, 2).Value = "Name"
             worksheet.Cells(1, 3).Value = "Description"
             worksheet.Cells(1, 4).Value = "Expiry Date"
             worksheet.Cells(1, 5).Value = "Price"
 
-            ' Format the header row
             Using headerRange = worksheet.Cells(1, 1, 1, 5)
                 headerRange.Style.Font.Bold = True
                 headerRange.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid
                 headerRange.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray)
             End Using
 
-            ' Populate rows with data from the list
             Dim rowIndex As Integer = 2
             For Each medicine In medicines
                 worksheet.Cells(rowIndex, 1).Value = medicine.MedicineId
@@ -185,10 +182,8 @@ Public Class FrmRegisterMedic
                 rowIndex += 1
             Next
 
-            ' Auto fit columns
             worksheet.Cells.AutoFitColumns()
 
-            ' Save the Excel file
             package.SaveAs(New FileInfo(filePath))
 
             MessageBox.Show("File saved in directory 'C:\Temp' ")
